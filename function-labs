@@ -1,0 +1,46 @@
+function distanceFromHqInBlocks(value) {
+    // Implement the logic to calculate the distance in blocks
+    return Math.abs(value - 42); // Example logic assuming HQ is at block 42
+}
+
+function distanceFromHqInFeet(someValue) {
+    const blocks = distanceFromHqInBlocks(someValue);
+    return blocks * 264; // There are 264 feet in a block
+}
+
+function distanceTravelledInFeet(start, destination) {
+    const blocksTravelled = Math.abs(start - destination);
+    return blocksTravelled * 264;
+}
+
+/**
+ * Calculates the fare price for a given trip based on the distance travelled.
+ *
+ * @param {number} start - The starting point of the trip.
+ * @param {number} destination - The destination point of the trip.
+ * @returns {number|string} - The fare price in dollars, or a string indicating that the distance is too far to travel.
+ */
+function calculatesFarePrice(start, destination) {
+    const distance = distanceTravelledInFeet(start, destination);
+    if (distance <= 400) {
+        return 0; // Free sample
+    } else if (distance > 400 && distance <= 2000) {
+        return (distance - 400) * 0.02; // 2 cents per foot after the first 400 feet
+    } else if (distance > 2000 && distance <= 2500) {
+        return 25; // Flat fare for distances over 2000 feet but under 2500 feet
+    } else {
+        return 'cannot travel that far'; // Distance over 2500 feet
+    }
+}
+
+// Export the functions
+module.exports = {
+    distanceFromHqInBlocks,
+    distanceFromHqInFeet,
+    distanceTravelledInFeet,
+    calculatesFarePrice
+};
+
+const { calculatesFarePrice } = require('./function-labs');
+
+// Your test cases here
